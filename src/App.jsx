@@ -6,10 +6,8 @@ function App() {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  // ➡️ UPDATED backendUrl here
   const backendUrl = "https://facebookapi-2.onrender.com/api/posts"; 
 
-  // Fetch posts
   useEffect(() => {
     fetch(backendUrl)
       .then((res) => res.json())
@@ -17,7 +15,6 @@ function App() {
       .catch((err) => console.error("Error fetching posts:", err));
   }, []);
 
-  // Submit new post
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -47,7 +44,6 @@ function App() {
     <div style={{ fontFamily: "Arial", maxWidth: "600px", margin: "20px auto" }}>
       <h2>Facebook-like Posts</h2>
 
-      {/* Post form */}
       <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
         <input
           type="text"
@@ -100,7 +96,6 @@ function App() {
         </button>
       </form>
 
-      {/* Posts list */}
       {posts.length === 0 ? (
         <p>No posts yet.</p>
       ) : (
@@ -117,7 +112,6 @@ function App() {
             <h4>{post.author}</h4>
             <p>{post.content}</p>
 
-            {/* ✅ Fix: properly display external image URLs */}
             {post.imageUrl && (
               <img
                 src={post.imageUrl}
